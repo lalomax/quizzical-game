@@ -32,6 +32,13 @@ body {
   min-height: 100vh;
 }
 
+.row {
+  
+  margin: .5rem;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -65,7 +72,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #b6c3ce;
+    color: #fff7f7;
     background-color: #ffffff;
   }
   a:hover {
