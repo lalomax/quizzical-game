@@ -126,6 +126,7 @@ function App() {
   return (
     <div className="App">
       {isOver && <Confetti />}
+      <h1>Quizzical Game</h1>
       {itemsArray}
       <button className="button-check" onClick={refetch}>
         New Game
