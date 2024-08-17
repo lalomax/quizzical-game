@@ -28,7 +28,7 @@
   </a>
   -->
 
-  <h3 align="center">Digital Business Card</h3>
+  <h2 align="center">Quizzical Game</h2>
 
 </div>
 
