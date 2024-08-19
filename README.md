@@ -70,7 +70,10 @@
 
 Overall, this code implements a React trivia quiz game that fetches questions from an API, displays them with randomized answer options, tracks user selections, awards points for correct answers, and indicates game completion with confetti animation and a "New Game" option.
 
+
+
 API: https://opentdb.com/
+Proposed by: https://v2.scrimba.com/home
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,11 +102,11 @@ If it is not installed, [download](https://nodejs.org/en) and install it.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/lalomax/digital_bussines-card.git
+   git clone https://github.com/lalomax/quizzical-game.git
    ```
 1. Open directory
    ```sh
-   cd digital_bussines-card
+   cd quizzical-game
    ```
    
 3. Install NPM packages
