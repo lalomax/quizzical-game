@@ -72,8 +72,8 @@ Overall, this code implements a React trivia quiz game that fetches questions fr
 
 
 
-API: https://opentdb.com/
-Proposed by: https://v2.scrimba.com/home
+* API: https://opentdb.com/
+* Proposed by: https://v2.scrimba.com/home
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
