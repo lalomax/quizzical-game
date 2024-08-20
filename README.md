@@ -46,7 +46,7 @@ Overall, this code implements a React trivia quiz game that fetches questions fr
 
 
 * API: https://opentdb.com/
-* Proposed by: https://v2.scrimba.com/home
+* Proposed by: [scrimba](https://v2.scrimba.com/home)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,7 +145,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [https://x.com/OrlandoFloresH](https://x.com/OrlandoFloresH) - createc.bo@gmail.com
+Your Name - [https://x.com/OrlandoFloresH](https://x.com/OrlandoFloresH) - lalomax365.bo@gmail.com
 
 Project Link: [https://github.com/lalomax/travel-journal](https://github.com/lalomax/quizzical-game)
 
