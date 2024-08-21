@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Button from "./components/Button";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
@@ -9,21 +9,18 @@ function App() {
   const [items, setItems] = useState([]);
   const [isOver, setIsOver] = useState(false);
 
-  const { data, isLoaded, error, refetch } = usefetch(
+  const { data, isLoaded, refetch } = usefetch(
     "https://opentdb.com/api.php?amount=5"
   );
 
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
+  // Shuffle array elements
+  const shuffle = (array) => {
+    let currentIndex = array.length, randomIndex;
 
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
         array[currentIndex],
@@ -31,97 +28,83 @@ function App() {
     }
 
     return array;
-  }
+  };
 
-  // if (isLoaded) {
-  //   console.log(data.data.results)
-
-  // } else {
-  //   return <div className="">Loading</div>
-  // }
-
+  // Initialize items with quiz data
   useEffect(() => {
     if (isLoaded) {
-      setItems(
-        data.data.results.map((el) => {
-          return {
-            question: el.question,
-            point: 0,
-            answers: shuffle([
-              {
-                answer: el.correct_answer,
-                isCorrect: true,
-                isSelected: false,
-                id: nanoid(),
-              },
-            ].concat(
-              el.incorrect_answers.map((el) => {
-                return {
-                  answer: el,
-                  isCorrect: false,
-                  isSelected: false,
-                  id: nanoid(),
-                };
-              })
-            ))
-          };
-        })
-      );
-    }
-    // handleGame()
-  }, [isLoaded]);
+      const formattedItems = data.data.results.map((el) => ({
+        question: el.question,
+        point: 0,
+        answers: shuffle(
+          [
+            {
+              answer: el.correct_answer,
+              isCorrect: true,
+              isSelected: false,
+              id: nanoid(),
+            },
+            ...el.incorrect_answers.map((incorrect) => ({
+              answer: incorrect,
+              isCorrect: false,
+              isSelected: false,
+              id: nanoid(),
+            })),
+          ]
+        ),
+      }));
 
+      setItems(formattedItems);
+    }
+  }, [isLoaded, data]);
+
+  // Check if the game is over
   useEffect(() => {
-    setIsOver(items.every((item) => item.point));
+    setIsOver(items.every((item) => item.point === 1));
   }, [items]);
 
-  function holdSelection(id, i) {
-    setItems((oldItems) => {
-      const newItems = [...oldItems];
-      const item = newItems[i];
-      newItems[i].point = 0;
+  // Handle answer selection
+  const holdSelection = useCallback((id, i) => {
+    setItems((prevItems) => {
+      return prevItems.map((item, index) => {
+        if (index !== i) return item;
 
-      newItems[i].answers = item.answers.map((el) =>
-        el.id === id
-          ? { ...el, isSelected: true }
-          : { ...el, isSelected: false }
-      );
+        const updatedAnswers = item.answers.map((answer) => ({
+          ...answer,
+          isSelected: answer.id === id,
+        }));
 
-      item.answers.map((el) => {
-        if (el.isSelected && el.isCorrect) {
-          newItems[i].point = 1;
-        }
+        const isCorrect = updatedAnswers.find((ans) => ans.id === id && ans.isCorrect);
+
+        return {
+          ...item,
+          answers: updatedAnswers,
+          point: isCorrect ? 1 : 0,
+        };
       });
-      return newItems;
     });
-  }
+  }, []);
 
-  let itemsArray = items.map((el, i) => {
+  // Render quiz items
+  const itemsArray = items.map((el, i) => {
     const styles = {
       backgroundColor: el.point === 1 ? "#3b9660" : "black",
     };
+
     return (
-      <div className="row" key={i} point={items.point} style={styles}>
+      <div className="row" key={i} style={styles}>
         <div dangerouslySetInnerHTML={{ __html: el.question }} />
-        {el.answers.map((item) => {
-          return (
-            <Button
-              key={item.id}
-              value={item.answer}
-              isSelected={item.isSelected}
-              holdSelection={() => holdSelection(item.id, i)}
-            />
-          );
-        })}
-        {/* {i + 1 < items.length && <hr />} */}
+        {el.answers.map((answer) => (
+          <Button
+            key={answer.id}
+            value={answer.answer}
+            isSelected={answer.isSelected}
+            holdSelection={() => holdSelection(answer.id, i)}
+          />
+        ))}
       </div>
     );
   });
-
-  // function handleGame() {
-  //   setIsOver(false)
-  //   refetch
-  // }
 
   return (
     <div className="App">
