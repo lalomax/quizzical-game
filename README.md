@@ -38,7 +38,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![image](https://github.com/user-attachments/assets/4f6f6ed7-ed4c-41d5-8159-41bed024dd2b)
+![image](https://github.com/user-attachments/assets/dbc1a678-57e9-4002-b08b-54c685eb61a1)
 
 
 Overall, this code implements a React trivia quiz game that fetches questions from an API, displays them with randomized answer options, tracks user selections, awards points for correct answers, and indicates game completion with confetti animation and a "New Game" option.
@@ -98,7 +98,7 @@ If it is not installed, [download](https://nodejs.org/en) and install it.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
+- [x] Setting options
 - [ ] Multi-language Support
     - [ ] Spanish
 
@@ -145,9 +145,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [https://x.com/OrlandoFloresH](https://x.com/OrlandoFloresH) - lalomax365.bo@gmail.com
+Orlando - [https://x.com/OrlandoFloresH](https://x.com/OrlandoFloresH) - lalomax365.bo@gmail.com
 
-Project Link: [https://github.com/lalomax/travel-journal](https://github.com/lalomax/quizzical-game)
+Project Link: [https://github.com/lalomax/quizzical-game](https://github.com/lalomax/quizzical-game)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
