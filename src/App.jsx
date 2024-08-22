@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Button from "./components/Button";
+import Settings from "./components/Settings";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import "./App.css";
@@ -8,14 +9,14 @@ import usefetch from "./usefetch";
 function App() {
   const [items, setItems] = useState([]);
   const [isOver, setIsOver] = useState(false);
+  const [apiUrl, setApiUrl] = useState("https://opentdb.com/api.php?amount=5");
 
-  const { data, isLoaded, refetch } = usefetch(
-    "https://opentdb.com/api.php?amount=5"
-  );
+  const { data, isLoaded, refetch } = usefetch(apiUrl);
 
   // Shuffle array elements
   const shuffle = (array) => {
-    let currentIndex = array.length, randomIndex;
+    let currentIndex = array.length,
+      randomIndex;
 
     while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
@@ -74,7 +75,9 @@ function App() {
           isSelected: answer.id === id,
         }));
 
-        const isCorrect = updatedAnswers.find((ans) => ans.id === id && ans.isCorrect);
+        const isCorrect = updatedAnswers.find(
+          (ans) => ans.id === id && ans.isCorrect
+        );
 
         return {
           ...item,
@@ -84,6 +87,29 @@ function App() {
       });
     });
   }, []);
+
+  // Handle settings form submission and update API URL
+  const handleGenerate = (formData) => {
+    const { trivia_amount, trivia_category, trivia_difficulty, trivia_type, trivia_encode } = formData;
+
+    let url = `https://opentdb.com/api.php?amount=${trivia_amount}`;
+
+    if (trivia_category !== "any") {
+      url += `&category=${trivia_category}`;
+    }
+    if (trivia_difficulty !== "any") {
+      url += `&difficulty=${trivia_difficulty}`;
+    }
+    if (trivia_type !== "any") {
+      url += `&type=${trivia_type}`;
+    }
+    if (trivia_encode !== "default") {
+      url += `&encode=${trivia_encode}`;
+    }
+
+    setApiUrl(url); // Update the API URL with the new settings
+    refetch(); // Trigger the refetch to get new questions
+  };
 
   // Render quiz items
   const itemsArray = items.map((el, i) => {
@@ -109,6 +135,7 @@ function App() {
   return (
     <div className="App">
       {isOver && <Confetti />}
+      <Settings onGenerate={handleGenerate} />
       <h1>Quizzical Game</h1>
       {itemsArray}
       <button className="button-check" onClick={refetch}>
