@@ -1,0 +1,55 @@
+/* Settings.css */
+
+.burger-menu {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 5px;
+  }
+  
+  .settings-menu {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: black;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 999;
+    width: 300px;
+  }
+  
+  .form-api {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-api input,
+  .form-api select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-api button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-api button:hover {
+    background-color: #0056b3;
+  }
+  
