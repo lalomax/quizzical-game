@@ -103,10 +103,7 @@ function App() {
     if (trivia_type !== "any") {
       url += `&type=${trivia_type}`;
     }
-    if (trivia_encode !== "default") {
-      url += `&encode=${trivia_encode}`;
-    }
-
+    
     setApiUrl(url); // Update the API URL with the new settings
     refetch(); // Trigger the refetch to get new questions
   };

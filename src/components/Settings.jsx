@@ -8,7 +8,6 @@ function Settings({ onGenerate }) {
     trivia_category: 'any',
     trivia_difficulty: 'any',
     trivia_type: 'any',
-    trivia_encode: 'default',
   });
 
   const toggleMenu = () => {
@@ -111,18 +110,7 @@ function Settings({ onGenerate }) {
               <option value="boolean">True / False</option>
             </select>
 
-            <label htmlFor="trivia_encode">Select Encoding: </label>
-            <select
-              name="trivia_encode"
-              className="form-control"
-              value={formData.trivia_encode}
-              onChange={handleChange}
-            >
-              <option value="default">Default Encoding</option>
-              <option value="urlLegacy">Legacy URL Encoding</option>
-              <option value="url3986">URL Encoding (RFC 3986)</option>
-              <option value="base64">Base64 Encoding</option>
-            </select>
+            <br/>
 
             <button className="btn btn-lg btn-primary btn-block" type="submit">
               Generate
